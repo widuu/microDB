@@ -37,6 +37,7 @@ ZEPHIR_INIT_CLASS(Microdb_Adapter_Adapter) {
  *		'dbname'    =>   'test',
  *		'charset'     =>   'utf8',
  *		'prefix'        =>    'wd_',
+ *		'options'     =>    array();
  *	);	
  * </code>
  * @author widuu <admin@widuu.com>

@@ -1,4 +1,97 @@
-/*
+<html>
+
+
+    <head>
+
+        <link rel="stylesheet" type="text/css" href="../../../asset/static/prettify.css" />
+
+<script src="../../../asset/static/prettify.js"></script>
+<script src="../../../asset/api_definition.js"></script>
+
+
+                        <link rel="stylesheet" type="text/css" href="../../../asset/static/prettify.css" />
+                    <link rel="stylesheet" type="text/css" href="../../../asset/static/zephir-theme.css" />
+            
+    
+
+                        <script src="../../../asset/static/prettify.js"></script>
+                                    <script src="../../../asset/api_definition.js"></script>
+                    <script src="../../../asset/static/jquery.min.js"></script>
+                    <script src="../../../asset/static/zephir-doc.js"></script>
+            
+        <script>var ZepCurrentPath = '../../../'</script>
+
+        
+    </head>
+
+
+    <body onload="prettyPrint()">
+        <div id="top-bar">
+            <div id="top-left">
+                                    microdb Documentation <span class="version">v0.0.1</span>
+                            </div>
+            <div id="top-right">
+
+            </div>
+        </div>
+
+        <div id="body">
+
+            <div id="body-left">
+
+                <div class="header-search">
+
+                    <input class="search-box" placeholder="Search for a class or namespace " type="text" />
+
+                    <div id="menu-wrapper">
+
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div id="body-right">
+                <div class="content">
+                    
+<div class="breadcrumb">
+    
+    <ul>
+        
+        <li><a href="../../../index.html">Home</a></li>
+        
+                <li><a href="../../../classes.html">Classes</a></li>
+                <li><a href="../../../class/Microdb/Adapter/Pdo.html">Microdb\Adapter\Pdo</a></li>
+                <li><a >Source</a></li>
+                
+    </ul>
+    
+</div>
+<div class="class-header source clearfix">
+    
+    <div class="access-buttons">
+        <a class="zep-button" href="../../../class/Microdb/Adapter/Pdo.html">Class</a>
+
+                <a class="zep-button" href="https://github.com/widuu/microDB/tree/master/microdb/adapter/pdo.zep">Github</a>
+            </div>
+    
+    <div class="class-full-name">
+        
+        <span class="class-type">Class</span>
+        
+                <span class="namespace-piece">
+            <a href="../../../namespace/Microdb.html">Microdb</a>
+        </span>
+                <span class="namespace-piece">
+            <a href="../../../namespace/Microdb/Adapter.html">Adapter</a>
+        </span>
+                <h1 class="class-name">Pdo</h1>
+    </div>
+    
+</div>
+
+
+<pre class="zephir-source-file prettyprint linenums">/*
  +------------------------------------------------------------------------+
  | Microdb                                                                |
  +------------------------------------------------------------------------+
@@ -25,46 +118,12 @@ namespace Microdb\Adapter;
 
 class Pdo extends Adapter{
 
-	/**
-	 * bind  type null 
-	 */
-
 	const TYPE_NULL  = 0;
-
-	/**
-	 * bind  type int 
-	 */
-	
 	const TYPE_INT     = 1;
-
-	/**
-	 * bind  type string 
-	 */
-
 	const TYPE_STR     = 2;
-
-	/**
-	 *  bind type big data
-	 */
-
 	const TYPE_LOB    = 3;
-
-	/**
-	 * bind  type stmt 
-	 */
-
 	const TYPE_STMT  = 4;
-
-	/**
-	 * bind  type boolean 
-	 */
-
 	const TYPE_BOOL  = 5; 
-
-	/**
-	 * bind  type decimal 
-	 */
-
 	const TYPE_DECIMAL = 1024;
 
 	/**
@@ -110,7 +169,6 @@ class Pdo extends Adapter{
 	 *		'dbname'    =>   'test',
 	 *		'charset'     =>   'utf8',
 	 *		'prefix'        =>    'wd_',
-	 *		'options'     =>    array();
 	 *
 	 *	);	
 	 * </code>
@@ -171,18 +229,8 @@ class Pdo extends Adapter{
 	}
 
 	/**
-	 * executes prepare pdo statment and return PDOStatement
-	 * @param 	PDOStatement		statement  <PDO execute prepare result>
-	 * @param 	array			dataValue  <PDO bindVaue>
-	 * @param 	array			dataTypes  <PDO data_type>
-	 * @return 	PDOStatement 	
-	 * <code>
-	 * $statement = $db->prepare("select * from user where HOST= ? ");
-	 * $execresult = $db->execPrepare( $statement , array('widuu') ,array(  mypdo::TYPE_STR ));
-	 * //or
-	 * $statement = $db->prepare("select * from user where HOST=:host");
-	 * $execresult = $db->execPrepare( $statement , array('host'=>'widuu') ,array( 'host' => mypdo::STR ));
-	 * </code>
+	 * executes prepare 
+	 * 
 	 */
 
 	public function execPrepare(<\PDOStatement> statement ,array ! dataValue , dataTypes = null)-> <\PDOStatement> {
@@ -234,3 +282,13 @@ class Pdo extends Adapter{
 		return statement;
 	}
 }
+</pre>                </div>
+            </div>
+
+        </div>
+
+    </body>
+
+
+
+</html>

@@ -3,8 +3,9 @@
 /**
   * example for prepapre
   */
+use microdb\adapter\pdo as mypdo;
 
-$db = new microdb\adapter\pdo(
+$db = new mypdo(
 		array(
 			'host'		=>  'localhost',
 			'username'	=>  'root',
@@ -14,12 +15,22 @@ $db = new microdb\adapter\pdo(
 		)
 	);
 
-$statement = $db->prepare("select * from user where User=:user");
-$execute_result = $statement->execute(array('user'=>'root'));
-if ( !$execute_result ){
-	echo "Sql query string error";
+//you can use this 
+
+$statement = $db->prepare("select * from user where HOST=:host");
+$execresult = $db->execPrepare( $statement , array('host'=>'widuu') ,array( 'host' => mypdo::STR ));
+
+// or 
+
+$statement = $db->prepare("select * from user where HOST= ? ");
+$execresult = $db->execPrepare( $statement , array('widuu') ,array(  mypdo::TYPE_STR ));
+
+if ( !$execresult ){
+	echo "Sql query string error\n";
 }
-echo "\n";
-$rows = $statement->fetchAll();
-print_r($rows);
+
+$red = $execresult->fetchAll();
+
+print_r($red);
+
 echo "\n";

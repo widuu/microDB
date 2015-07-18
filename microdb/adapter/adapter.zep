@@ -35,6 +35,7 @@ abstract class Adapter{
 	 *		'dbname'    =>   'test',
 	 *		'charset'     =>   'utf8',
 	 *		'prefix'        =>    'wd_',
+	 *		'options'     =>    array();
 	 *	);	
 	 * </code>
 	 * @author widuu <admin@widuu.com>
@@ -47,7 +48,7 @@ abstract class Adapter{
 	 * 
 	 *
 	 */
-	 
+
 	protected static  function parseConfig( var callback );
 
 

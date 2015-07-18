@@ -13,9 +13,9 @@
 #define PHP_MICRODB_NAME        "microdb"
 #define PHP_MICRODB_VERSION     "0.0.1"
 #define PHP_MICRODB_EXTNAME     "microdb"
-#define PHP_MICRODB_AUTHOR      ""
+#define PHP_MICRODB_AUTHOR      "widuu <admin@widuu.com>"
 #define PHP_MICRODB_ZEPVERSION  "0.7.1b"
-#define PHP_MICRODB_DESCRIPTION ""
+#define PHP_MICRODB_DESCRIPTION "php database framework written in c"
 
 
 

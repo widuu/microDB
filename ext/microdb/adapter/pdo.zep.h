@@ -28,7 +28,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_microdb_adapter_pdo_prepare, 0, 0, 1)
 	ZEND_ARG_INFO(0, sqlStr)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_microdb_adapter_pdo_execprepare, 0, 0, 3)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_microdb_adapter_pdo_execprepare, 0, 0, 2)
 	ZEND_ARG_OBJ_INFO(0, statement, PDOStatement, 0)
 	ZEND_ARG_ARRAY_INFO(0, dataValue, 0)
 	ZEND_ARG_INFO(0, dataTypes)

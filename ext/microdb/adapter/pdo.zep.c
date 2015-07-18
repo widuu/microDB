@@ -23,6 +23,7 @@
 #include "kernel/concat.h"
 #include "kernel/string.h"
 #include "ext/pdo/php_pdo_driver.h"
+#include "kernel/main.h"
 
 
 /**
@@ -52,6 +53,20 @@ ZEPHIR_INIT_CLASS(Microdb_Adapter_Pdo) {
 	 * database prefix
 	 */
 	zend_declare_property_null(microdb_adapter_pdo_ce, SL("_prefix"), ZEND_ACC_PROTECTED TSRMLS_CC);
+
+	zend_declare_class_constant_long(microdb_adapter_pdo_ce, SL("TYPE_NULL"), 0 TSRMLS_CC);
+
+	zend_declare_class_constant_long(microdb_adapter_pdo_ce, SL("TYPE_INT"), 1 TSRMLS_CC);
+
+	zend_declare_class_constant_long(microdb_adapter_pdo_ce, SL("TYPE_STR"), 2 TSRMLS_CC);
+
+	zend_declare_class_constant_long(microdb_adapter_pdo_ce, SL("TYPE_LOB"), 3 TSRMLS_CC);
+
+	zend_declare_class_constant_long(microdb_adapter_pdo_ce, SL("TYPE_STMT"), 4 TSRMLS_CC);
+
+	zend_declare_class_constant_long(microdb_adapter_pdo_ce, SL("TYPE_BOOL"), 5 TSRMLS_CC);
+
+	zend_declare_class_constant_long(microdb_adapter_pdo_ce, SL("TYPE_DECIMAL"), 1024 TSRMLS_CC);
 
 	return SUCCESS;
 
@@ -134,7 +149,7 @@ PHP_METHOD(Microdb_Adapter_Pdo, __construct) {
 			zephir_check_temp_parameter(_2);
 			zephir_check_call_status();
 		}
-		zephir_throw_exception_debug(_0, "microdb/adapter/pdo.zep", 56 TSRMLS_CC);
+		zephir_throw_exception_debug(_0, "microdb/adapter/pdo.zep", 63 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -196,7 +211,7 @@ PHP_METHOD(Microdb_Adapter_Pdo, connect) {
 		array_init(options);
 	}
 	if (zephir_array_isset_string(config, SS("prefix"))) {
-		zephir_array_fetch_string(&_0, config, SL("prefix"), PH_NOISY | PH_READONLY, "microdb/adapter/pdo.zep", 99 TSRMLS_CC);
+		zephir_array_fetch_string(&_0, config, SL("prefix"), PH_NOISY | PH_READONLY, "microdb/adapter/pdo.zep", 106 TSRMLS_CC);
 		zephir_update_property_this(this_ptr, SL("_prefix"), _0 TSRMLS_CC);
 		zephir_array_unset_string(&config, SS("prefix"), PH_SEPARATE);
 	}
@@ -204,7 +219,7 @@ PHP_METHOD(Microdb_Adapter_Pdo, connect) {
 	if (!(zephir_array_isset_string_fetch(&dsn, config, SS("dsn"), 0 TSRMLS_CC))) {
 		ZEPHIR_INIT_VAR(dsnparts);
 		array_init(dsnparts);
-		zephir_is_iterable(config, &_2, &_1, 0, 0, "microdb/adapter/pdo.zep", 109);
+		zephir_is_iterable(config, &_2, &_1, 0, 0, "microdb/adapter/pdo.zep", 116);
 		for (
 		  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
 		  ; zephir_hash_move_forward_ex(_2, &_1)
@@ -213,7 +228,7 @@ PHP_METHOD(Microdb_Adapter_Pdo, connect) {
 			ZEPHIR_GET_HVALUE(value, _3);
 			ZEPHIR_INIT_LNVAR(_4);
 			ZEPHIR_CONCAT_VSV(_4, key, "=", value);
-			zephir_array_append(&dsnparts, _4, PH_SEPARATE, "microdb/adapter/pdo.zep", 107);
+			zephir_array_append(&dsnparts, _4, PH_SEPARATE, "microdb/adapter/pdo.zep", 114);
 		}
 		ZEPHIR_INIT_NVAR(dsn);
 		zephir_fast_join_str(dsn, SL(";"), dsnparts TSRMLS_CC);
@@ -268,19 +283,101 @@ PHP_METHOD(Microdb_Adapter_Pdo, prepare) {
 
 /**
  * executes prepare 
- *
+ * 
  */
 PHP_METHOD(Microdb_Adapter_Pdo, execPrepare) {
 
+	zephir_fcall_cache_entry *_6 = NULL;
+	int ZEPHIR_LAST_CALL_STATUS;
+	zval *_5 = NULL;
+	HashTable *_2;
+	HashPosition _1;
+	zend_bool _0, _4;
 	zval *dataValue = NULL;
-	zval *statement, *dataValue_param = NULL, *dataTypes;
+	zval *statement, *dataValue_param = NULL, *dataTypes = NULL, *key = NULL, *value = NULL, *parameter = NULL, *type = NULL, *customValue = NULL, **_3;
 
-	zephir_fetch_params(0, 3, 0, &statement, &dataValue_param, &dataTypes);
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 2, 1, &statement, &dataValue_param, &dataTypes);
 
 	dataValue = dataValue_param;
 
+	if (!dataTypes) {
+		dataTypes = ZEPHIR_GLOBAL(global_null);
+	}
 
 
+	_0 = Z_TYPE_P(statement) != IS_OBJECT;
+	if (!(_0)) {
+		_0 = !((zephir_instance_of_ev(statement, zephir_get_internal_ce(SS("pdostatement") TSRMLS_CC) TSRMLS_CC)));
+	}
+	if (_0) {
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "PDOStatement type error", "microdb/adapter/pdo.zep", 148);
+		return;
+		RETURN_MM_NULL();
+	}
+	zephir_is_iterable(dataValue, &_2, &_1, 0, 0, "microdb/adapter/pdo.zep", 188);
+	for (
+	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
+	  ; zephir_hash_move_forward_ex(_2, &_1)
+	) {
+		ZEPHIR_GET_HMKEY(key, _2, _1);
+		ZEPHIR_GET_HVALUE(value, _3);
+		if (Z_TYPE_P(key) == IS_LONG) {
+			ZEPHIR_INIT_NVAR(parameter);
+			ZVAL_LONG(parameter, (zephir_get_numberval(key) + 1));
+		} else {
+			ZEPHIR_CPY_WRT(parameter, key);
+		}
+		_4 = Z_TYPE_P(dataTypes) == IS_ARRAY;
+		if (_4) {
+			ZEPHIR_OBS_NVAR(type);
+			_4 = zephir_array_isset_fetch(&type, dataTypes, key, 0 TSRMLS_CC);
+		}
+		if (_4) {
+			do {
+				if (ZEPHIR_IS_LONG(type, 0)) {
+					ZEPHIR_INIT_NVAR(customValue);
+					ZVAL_NULL(customValue);
+					break;
+				}
+				if (ZEPHIR_IS_LONG(type, 1)) {
+					ZEPHIR_INIT_NVAR(customValue);
+					ZVAL_LONG(customValue, zephir_get_intval(value));
+					break;
+				}
+				if (ZEPHIR_IS_LONG(type, 2)) {
+					zephir_get_strval(_5, value);
+					ZEPHIR_CPY_WRT(customValue, _5);
+					break;
+				}
+				if (ZEPHIR_IS_LONG(type, 5)) {
+					ZEPHIR_INIT_NVAR(customValue);
+					ZVAL_BOOL(customValue, zephir_get_boolval(value));
+					break;
+				}
+				if (ZEPHIR_IS_LONG(type, 1024)) {
+					ZEPHIR_INIT_NVAR(customValue);
+					ZVAL_DOUBLE(customValue, zephir_get_doubleval(value));
+					ZEPHIR_INIT_NVAR(type);
+					ZVAL_LONG(type, 1024);
+					break;
+				}
+				ZEPHIR_CPY_WRT(customValue, value);
+				ZEPHIR_INIT_NVAR(type);
+				ZVAL_LONG(type, 1024);
+			} while(0);
+
+			ZEPHIR_CALL_METHOD(NULL, statement, "bindvalue", &_6, 0, parameter, customValue, type);
+			zephir_check_call_status();
+		} else {
+			ZEPHIR_CALL_METHOD(NULL, statement, "bindvalue", &_6, 0, parameter, value);
+			zephir_check_call_status();
+		}
+	}
+	ZEPHIR_CALL_METHOD(NULL, statement, "execute", NULL, 0);
+	zephir_check_call_status();
+	RETVAL_ZVAL(statement, 1, 0);
+	RETURN_MM();
 
 }
 
