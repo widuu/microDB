@@ -25,37 +25,115 @@ namespace Microdb\Adapter;
 
 class Pdo extends Adapter{
 
+
+	/**
+	 * mutil database flag
+	 */
+
+	protected _multi_flag = false;
+
+	/**
+	 * database config
+	 */
+
+	protected  static _config = null { get };
+
+	/**
+	 * Pdo resource
+	 */
+
+	 protected  _pdo { get };
+
+	 /**
+	  * database prefix
+	  */
+
+	protected _prefix { get,set };
+
+
+	public function __construct( array! config = null ){
+	 	if empty( config ) {
+	 		throw new Exception( "params must be array" );
+	 	}
+
+	 	let this->_pdo = this->connect( config );
+	 }
+
 	/**
 	 * The function connect database , params must be array
 	 * <code>
 	 * $config = array(
-	 *		'username' => 'username',
-	 *		'password' => 'password',
-	 *		'host'	     => 'localhost',
-	 *		'database'  => 'test',
-	 *		'charset'    => 'utf8',
-	 *		'prefix'      => 'wd_'
+	 *		'username'  =>  'username',
+	 *		'password'  =>   'password',
+	 *		'host'	      =>   'localhost',
+	 *		'dbname'    =>   'test',
+	 *		'charset'     =>   'utf8',
+	 *		'prefix'        =>    'wd_',
+	 *
 	 *	);	
 	 * </code>
 	 * @author widuu <admin@widuu.com>
 	 */
 
-	public function connect( array! config = null){
+	public function connect( array! config = null ) -> <\PDO>{
+		var username,password,host,dbname,charset,options,
+		dsnparts,dsn,key,value;
 
+		if fetch username , config["username"] {
+			unset config["username"];
+		}
+
+		if fetch password , config["password"] {
+			unset config["password"];
+		}
+
+		//set pdo options
+		if  fetch options , config["options"] {
+			unset config["options"];
+		}else{
+			let options = [];
+		}
+
+		//set database table prefix
+		if isset config["prefix"] {
+			let this->_prefix = config["prefix"];
+			unset config["prefix"];
+		}
+
+		//parse this dsn
+		if !fetch dsn , config["dsn"] {
+			let dsnparts = [];
+			for key ,value in config {
+				let dsnparts[] = key ."=" .value;
+			}
+			let dsn = join(";",dsnparts);
+		}
+
+		//create pdo connect
+		return new \PDO("mysql:".dsn,username,password,options);		 
 	}
 
 	/**
-	 * user can use this function parse database config to yourself
-	 * 
+	 *  return pdo prepare statement 
+	 * @param     string      sqlStr
+	 * @return     object      PDOStatement
+	 * <code>
+	 *  $statement = $pdo->prepare( "select * from wd_user where name= :name" );
+	 *  $statement = $pdo->prepare( "select * from wd_user where name= ?" );
+	 * </code>
+	 * @author     widuu     <admin@widuu.com>
+	 */
+
+	public function prepare( string ! sqlStr ) -> <\PDOStatement> {
+		return this->_pdo->prepare(sqlStr);
+	}
+
+	/**
+	 * executes prepare 
 	 *
 	 */
 
-	public static  function parseConfig(callback){
-		//Judgment type , if not function throw exception;
-		if typeof callback != "object" {
-			throw new \Exception("param must be callback function");
-		}
-		
-		return {callback}();
+	public function execPrepare(<\PDOStatement> statement ,array ! dataValue , dataTypes )-> <\PDOStatement> {
+
 	}
 }

@@ -1,11 +1,11 @@
-srcdir = /home/widuu/zephir-lang/microdb/ext
-builddir = /home/widuu/zephir-lang/microdb/ext
-top_srcdir = /home/widuu/zephir-lang/microdb/ext
-top_builddir = /home/widuu/zephir-lang/microdb/ext
+srcdir = /home/widuu/git/microdb/ext
+builddir = /home/widuu/git/microdb/ext
+top_srcdir = /home/widuu/git/microdb/ext
+top_builddir = /home/widuu/git/microdb/ext
 EGREP = /bin/grep -E
 SED = /bin/sed
-CONFIGURE_COMMAND = './configure' '--enable-microdb' 'CC=gcc' 'CFLAGS=-O2 '-fvisibility=hidden' '-Wparentheses' '-flto' '-DZEPHIR_RELEASE=1''
-CONFIGURE_OPTIONS = '--enable-microdb' 'CC=gcc' 'CFLAGS=-O2 '-fvisibility=hidden' '-Wparentheses' '-flto' '-DZEPHIR_RELEASE=1''
+CONFIGURE_COMMAND = './configure' '--enable-microdb'
+CONFIGURE_OPTIONS = '--enable-microdb'
 SHLIB_SUFFIX_NAME = so
 SHLIB_DL_SUFFIX_NAME = so
 ZEND_EXT_TYPE = zend_extension
@@ -22,7 +22,7 @@ prefix = /usr/local/php
 exec_prefix = $(prefix)
 libdir = ${exec_prefix}/lib
 prefix = /usr/local/php
-phplibdir = /home/widuu/zephir-lang/microdb/ext/modules
+phplibdir = /home/widuu/git/microdb/ext/modules
 phpincludedir = /usr/local/php/include/php
 CC = gcc
 CFLAGS = -O2 -fvisibility=hidden -Wparentheses -flto -DZEPHIR_RELEASE=1
@@ -32,7 +32,7 @@ CPPFLAGS = -DHAVE_CONFIG_H
 CXX =
 CXXFLAGS =
 CXXFLAGS_CLEAN = $(CXXFLAGS)
-EXTENSION_DIR = /usr/local/php/lib/php/extensions/no-debug-non-zts-20131226
+EXTENSION_DIR = /usr/local/php/lib/php/extensions/no-debug-non-zts-20121212
 PHP_EXECUTABLE = /usr/local/php/bin/php
 EXTRA_LDFLAGS =
 EXTRA_LIBS =
@@ -165,7 +165,7 @@ clean:
 distclean: clean
 	rm -f Makefile config.cache config.log config.status Makefile.objects Makefile.fragments libtool main/php_config.h main/internal_functions_cli.c main/internal_functions.c stamp-h sapi/apache/libphp$(PHP_MAJOR_VERSION).module sapi/apache_hooks/libphp$(PHP_MAJOR_VERSION).module buildmk.stamp Zend/zend_dtrace_gen.h Zend/zend_dtrace_gen.h.bak Zend/zend_config.h TSRM/tsrm_config.h
 	rm -f php5.spec main/build-defs.h scripts/phpize
-	rm -f ext/date/lib/timelib_config.h ext/mbstring/oniguruma/config.h ext/mbstring/libmbfl/config.h ext/oci8/oci8_dtrace_gen.h ext/oci8/oci8_dtrace_gen.h.bak
+	rm -f ext/date/lib/timelib_config.h ext/mbstring/oniguruma/config.h ext/mbstring/libmbfl/config.h ext/mysqlnd/php_mysqlnd_config.h
 	rm -f scripts/man1/phpize.1 scripts/php-config scripts/man1/php-config.1 sapi/cli/php.1 sapi/cgi/php-cgi.1 ext/phar/phar.1 ext/phar/phar.phar.1
 	rm -f sapi/fpm/php-fpm.conf sapi/fpm/init.d.php-fpm sapi/fpm/php-fpm.service sapi/fpm/php-fpm.8 sapi/fpm/status.html
 	rm -f ext/iconv/php_have_bsd_iconv.h ext/iconv/php_have_glibc_iconv.h ext/iconv/php_have_ibm_iconv.h ext/iconv/php_have_iconv.h ext/iconv/php_have_libiconv.h ext/iconv/php_iconv_aliased_libiconv.h ext/iconv/php_iconv_supports_errno.h ext/iconv/php_php_iconv_h_path.h ext/iconv/php_php_iconv_impl.h
@@ -177,56 +177,56 @@ distclean: clean
 
 .PHONY: all clean install distclean test
 .NOEXPORT:
-microdb.lo: /home/widuu/zephir-lang/microdb/ext/microdb.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/microdb.c -o microdb.lo 
-kernel/main.lo: /home/widuu/zephir-lang/microdb/ext/kernel/main.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/main.c -o kernel/main.lo 
-kernel/memory.lo: /home/widuu/zephir-lang/microdb/ext/kernel/memory.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/memory.c -o kernel/memory.lo 
-kernel/exception.lo: /home/widuu/zephir-lang/microdb/ext/kernel/exception.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/exception.c -o kernel/exception.lo 
-kernel/hash.lo: /home/widuu/zephir-lang/microdb/ext/kernel/hash.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/hash.c -o kernel/hash.lo 
-kernel/debug.lo: /home/widuu/zephir-lang/microdb/ext/kernel/debug.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/debug.c -o kernel/debug.lo 
-kernel/backtrace.lo: /home/widuu/zephir-lang/microdb/ext/kernel/backtrace.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/backtrace.c -o kernel/backtrace.lo 
-kernel/object.lo: /home/widuu/zephir-lang/microdb/ext/kernel/object.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/object.c -o kernel/object.lo 
-kernel/array.lo: /home/widuu/zephir-lang/microdb/ext/kernel/array.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/array.c -o kernel/array.lo 
-kernel/extended/array.lo: /home/widuu/zephir-lang/microdb/ext/kernel/extended/array.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/extended/array.c -o kernel/extended/array.lo 
-kernel/string.lo: /home/widuu/zephir-lang/microdb/ext/kernel/string.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/string.c -o kernel/string.lo 
-kernel/fcall.lo: /home/widuu/zephir-lang/microdb/ext/kernel/fcall.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/fcall.c -o kernel/fcall.lo 
-kernel/extended/fcall.lo: /home/widuu/zephir-lang/microdb/ext/kernel/extended/fcall.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/extended/fcall.c -o kernel/extended/fcall.lo 
-kernel/require.lo: /home/widuu/zephir-lang/microdb/ext/kernel/require.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/require.c -o kernel/require.lo 
-kernel/file.lo: /home/widuu/zephir-lang/microdb/ext/kernel/file.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/file.c -o kernel/file.lo 
-kernel/operators.lo: /home/widuu/zephir-lang/microdb/ext/kernel/operators.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/operators.c -o kernel/operators.lo 
-kernel/math.lo: /home/widuu/zephir-lang/microdb/ext/kernel/math.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/math.c -o kernel/math.lo 
-kernel/concat.lo: /home/widuu/zephir-lang/microdb/ext/kernel/concat.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/concat.c -o kernel/concat.lo 
-kernel/variables.lo: /home/widuu/zephir-lang/microdb/ext/kernel/variables.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/variables.c -o kernel/variables.lo 
-kernel/filter.lo: /home/widuu/zephir-lang/microdb/ext/kernel/filter.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/filter.c -o kernel/filter.lo 
-kernel/iterator.lo: /home/widuu/zephir-lang/microdb/ext/kernel/iterator.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/iterator.c -o kernel/iterator.lo 
-kernel/time.lo: /home/widuu/zephir-lang/microdb/ext/kernel/time.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/time.c -o kernel/time.lo 
-kernel/exit.lo: /home/widuu/zephir-lang/microdb/ext/kernel/exit.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/kernel/exit.c -o kernel/exit.lo 
-microdb/adapter/adapter.lo: /home/widuu/zephir-lang/microdb/ext/microdb/adapter/adapter.zep.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/microdb/adapter/adapter.zep.c -o microdb/adapter/adapter.lo 
-microdb/adapter/pdo.lo: /home/widuu/zephir-lang/microdb/ext/microdb/adapter/pdo.zep.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/zephir-lang/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/zephir-lang/microdb/ext/microdb/adapter/pdo.zep.c -o microdb/adapter/pdo.lo 
+microdb.lo: /home/widuu/git/microdb/ext/microdb.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/microdb.c -o microdb.lo 
+kernel/main.lo: /home/widuu/git/microdb/ext/kernel/main.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/main.c -o kernel/main.lo 
+kernel/memory.lo: /home/widuu/git/microdb/ext/kernel/memory.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/memory.c -o kernel/memory.lo 
+kernel/exception.lo: /home/widuu/git/microdb/ext/kernel/exception.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/exception.c -o kernel/exception.lo 
+kernel/hash.lo: /home/widuu/git/microdb/ext/kernel/hash.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/hash.c -o kernel/hash.lo 
+kernel/debug.lo: /home/widuu/git/microdb/ext/kernel/debug.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/debug.c -o kernel/debug.lo 
+kernel/backtrace.lo: /home/widuu/git/microdb/ext/kernel/backtrace.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/backtrace.c -o kernel/backtrace.lo 
+kernel/object.lo: /home/widuu/git/microdb/ext/kernel/object.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/object.c -o kernel/object.lo 
+kernel/array.lo: /home/widuu/git/microdb/ext/kernel/array.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/array.c -o kernel/array.lo 
+kernel/extended/array.lo: /home/widuu/git/microdb/ext/kernel/extended/array.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/extended/array.c -o kernel/extended/array.lo 
+kernel/string.lo: /home/widuu/git/microdb/ext/kernel/string.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/string.c -o kernel/string.lo 
+kernel/fcall.lo: /home/widuu/git/microdb/ext/kernel/fcall.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/fcall.c -o kernel/fcall.lo 
+kernel/extended/fcall.lo: /home/widuu/git/microdb/ext/kernel/extended/fcall.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/extended/fcall.c -o kernel/extended/fcall.lo 
+kernel/require.lo: /home/widuu/git/microdb/ext/kernel/require.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/require.c -o kernel/require.lo 
+kernel/file.lo: /home/widuu/git/microdb/ext/kernel/file.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/file.c -o kernel/file.lo 
+kernel/operators.lo: /home/widuu/git/microdb/ext/kernel/operators.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/operators.c -o kernel/operators.lo 
+kernel/math.lo: /home/widuu/git/microdb/ext/kernel/math.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/math.c -o kernel/math.lo 
+kernel/concat.lo: /home/widuu/git/microdb/ext/kernel/concat.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/concat.c -o kernel/concat.lo 
+kernel/variables.lo: /home/widuu/git/microdb/ext/kernel/variables.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/variables.c -o kernel/variables.lo 
+kernel/filter.lo: /home/widuu/git/microdb/ext/kernel/filter.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/filter.c -o kernel/filter.lo 
+kernel/iterator.lo: /home/widuu/git/microdb/ext/kernel/iterator.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/iterator.c -o kernel/iterator.lo 
+kernel/time.lo: /home/widuu/git/microdb/ext/kernel/time.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/time.c -o kernel/time.lo 
+kernel/exit.lo: /home/widuu/git/microdb/ext/kernel/exit.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/kernel/exit.c -o kernel/exit.lo 
+microdb/adapter/adapter.lo: /home/widuu/git/microdb/ext/microdb/adapter/adapter.zep.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/microdb/adapter/adapter.zep.c -o microdb/adapter/adapter.lo 
+microdb/adapter/pdo.lo: /home/widuu/git/microdb/ext/microdb/adapter/pdo.zep.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/widuu/git/microdb/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/widuu/git/microdb/ext/microdb/adapter/pdo.zep.c -o microdb/adapter/pdo.lo 
 $(phplibdir)/microdb.la: ./microdb.la
 	$(LIBTOOL) --mode=install cp ./microdb.la $(phplibdir)
 

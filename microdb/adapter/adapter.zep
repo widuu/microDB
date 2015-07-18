@@ -29,12 +29,12 @@ abstract class Adapter{
 	 * The function connect database , params must be array
 	 * <code>
 	 * $config = array(
-	 *		'username' => 'username',
-	 *		'password' => 'password',
-	 *		'host'	     => 'localhost',
-	 *		'database'  => 'test',
-	 *		'charset'    => 'utf8',
-	 *		'prefix'      => 'wd_'
+	 *		'username'  =>  'username',
+	 *		'password'  =>   'password',
+	 *		'host'	      =>   'localhost',
+	 *		'dbname'    =>   'test',
+	 *		'charset'     =>   'utf8',
+	 *		'prefix'        =>    'wd_',
 	 *	);	
 	 * </code>
 	 * @author widuu <admin@widuu.com>
@@ -47,6 +47,8 @@ abstract class Adapter{
 	 * 
 	 *
 	 */
+	 
+	protected static  function parseConfig( var callback );
 
-	protected static  function parseConfig(callback);
+
 }
