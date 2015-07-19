@@ -201,7 +201,12 @@ class Pdo extends Adapter{
 			if typeof key == "integer" {
 				let parameter = key + 1;
 			}else {
-				let parameter = key ;
+				// bindValue key can use :key or key
+				if !strstr( key,":" ){
+					let parameter = ":".key ;
+				}else{
+					let parameter = key ;
+				}
 			}
 			// judgment type
 			if typeof dataTypes == "array" && fetch type , dataTypes[ key ] {
