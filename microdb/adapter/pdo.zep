@@ -238,8 +238,8 @@ class Pdo extends Adapter{
 	}
 
 	/**
-	 * get mysql server version
-	 *
+	 * get server database version
+	 * 
 	 * @author widuu <admin@widuu.com>
 	 */
 

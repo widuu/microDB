@@ -15,9 +15,6 @@ $db = new mypdo(
 		)
 	);
 
-
-echo $db->dbVersion();
-
 //you can use this 
 
 $statement = $db->prepare("select * from user where HOST=:host");
