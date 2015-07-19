@@ -4,15 +4,15 @@
  +------------------------------------------------------------------------+
  | Copyright (c) 2015-2016 http://www.widuu.com                           |
  +------------------------------------------------------------------------+
- | This source file is subject to the New BSD License that is bundled     |
- | with this package in the file docs/LICENSE.txt.                        |
+ | This source file is subject to the Apache License that is bundled      |
+ | with this package in the file LICENSE.txt.                             |
  |                                                                        |
  | If you did not receive a copy of the license and are unable to         |
  | obtain it through the world-wide-web, please send an email             |
- | to admin@widuu.com so we can send you a copy immediately.      	  |
+ | to admin@widuu.com so we can send you a copy immediately.      	  	  |
  +------------------------------------------------------------------------+
- | Authors: widuu <admin@widuu.com>                      		  |
- |          					                          |
+ | Authors: widuu <admin@widuu.com>                      		  	      |
+ |          					                          				  |
  +------------------------------------------------------------------------+
  */
 
@@ -35,19 +35,19 @@ class Pdo extends Adapter{
 	 * bind  type int 
 	 */
 	
-	const TYPE_INT     = 1;
+	const TYPE_INT  = 1;
 
 	/**
 	 * bind  type string 
 	 */
 
-	const TYPE_STR     = 2;
+	const TYPE_STR  = 2;
 
 	/**
 	 *  bind type big data
 	 */
 
-	const TYPE_LOB    = 3;
+	const TYPE_LOB  = 3;
 
 	/**
 	 * bind  type stmt 
@@ -65,13 +65,13 @@ class Pdo extends Adapter{
 	 * bind  type decimal 
 	 */
 
-	const TYPE_DECIMAL = 1024;
+	const TYPE_DECIMAL  = 1024;
 
 	/**
 	 * mutil database flag
 	 */
 
-	protected _multi_flag = false;
+	protected _multi_flag  = false;
 
 	/**
 	 * database config
@@ -118,8 +118,8 @@ class Pdo extends Adapter{
 	 */
 
 	public function connect( array! config = null ) -> <\PDO>{
-		var username,password,host,dbname,charset,options,
-		dsnparts,dsn,key,value;
+		var username,password,options,dsnparts
+		,dsn,key,value;
 
 		if fetch username , config["username"] {
 			unset config["username"];
@@ -136,6 +136,11 @@ class Pdo extends Adapter{
 			let options = [];
 		}
 
+		// database name
+		if fetch options , config["dbname"] {
+			unset config["dbname"];
+		}
+
 		//set database table prefix
 		if isset config["prefix"] {
 			let this->_prefix = config["prefix"];
@@ -150,6 +155,9 @@ class Pdo extends Adapter{
 			}
 			let dsn = join(";",dsnparts);
 		}
+
+		//add pdo exception
+		let options[\Pdo::ATTR_ERRMODE] = \Pdo::ERRMODE_EXCEPTION;
 
 		//create pdo connect
 		return new \PDO("mysql:".dsn,username,password,options);		 
@@ -187,7 +195,7 @@ class Pdo extends Adapter{
 
 	public function execPrepare(<\PDOStatement> statement ,array ! dataValue , dataTypes = null)-> <\PDOStatement> {
 		
-		var key,value,parameter,variable,type,customValue;
+		var key,value,parameter,variable,type;
 
 		if typeof statement != "object" || ! ( statement instanceof \PDOStatement ){
 			throw new \Exception("PDOStatement type error");
@@ -204,27 +212,27 @@ class Pdo extends Adapter{
 			if typeof dataTypes == "array" && fetch type , dataTypes[ key ] {
 				switch type {
 					case Pdo::TYPE_NULL :
-						let customValue = null;
+						let variable = null;
 						break;
 					case Pdo::TYPE_INT  :
-						let customValue = intval( value );
+						let variable = intval( value );
 						break;
 					case Pdo::TYPE_STR :
-						let customValue = ( string ) value;
+						let variable = ( string ) value;
 						break;
 					case Pdo::TYPE_BOOL :
-						let customValue = ( boolean ) value;
+						let variable = ( boolean ) value;
 						break;
 					case Pdo::TYPE_DECIMAL :
-						let customValue = doubleval(value),
+						let variable = doubleval(value),
 							type = Pdo::TYPE_DECIMAL;
 						break;
 					default :
-						let customValue = value,
+						let variable = value,
 							type = Pdo::TYPE_DECIMAL;
 				}
 
-				statement->bindValue( parameter , customValue , type );	
+				statement->bindValue( parameter , variable , type );	
 			}else{
 				statement->bindValue( parameter , value );
 			}
@@ -233,4 +241,15 @@ class Pdo extends Adapter{
 		statement->execute();
 		return statement;
 	}
+
+	/**
+	 * get mysql server version
+	 *
+	 * @author widuu <admin@widuu.com>
+	 */
+
+	public function getVerison(){
+		return this->_pdo->getAttribute(4);
+	}
+
 }

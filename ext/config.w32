@@ -2,7 +2,7 @@ ARG_ENABLE("microdb", "enable microdb", "no");
 
 if (PHP_MICRODB != "no") {
   EXTENSION("microdb", "microdb.c", null, "-I"+configure_module_dirname);
-  ADD_SOURCES(configure_module_dirname + "/kernel", "main.c memory.c exception.c hash.c debug.c backtrace.c object.c array.c string.c fcall.c require.c file.c operators.c math.c concat.c variables.c filter.c iterator.c exit.c time.c", "microdb");
+  ADD_SOURCES(configure_module_dirname + "/kernel", "main.c memory.c exception.c hash.c debug.c backtrace.c object.c array.c string.c fcall.c require.c file.c operators.c concat.c variables.c filter.c iterator.c exit.c time.c", "microdb");
   ADD_SOURCES(configure_module_dirname + "/kernel/extended", "array.c fcall.c", "microdb");
   /* PCRE is always included on WIN32 */
   AC_DEFINE("ZEPHIR_USE_PHP_PCRE", 1, "Whether PHP pcre extension is present at compile time");
@@ -11,6 +11,6 @@ if (PHP_MICRODB != "no") {
     AC_DEFINE("ZEPHIR_USE_PHP_JSON", 1, "Whether PHP json extension is present at compile time");
   }
   
-  ADD_SOURCES(configure_module_dirname + "/microdb/adapter", "adapter.zep.c pdo.zep.c", "microdb");
+  ADD_SOURCES(configure_module_dirname + "/microdb/adapter", "adapter.zep.c exception.zep.c pdo.zep.c", "microdb");
   ADD_FLAG("CFLAGS_MICRODB", "/D ZEPHIR_RELEASE");
 }

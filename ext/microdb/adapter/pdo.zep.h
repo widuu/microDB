@@ -11,6 +11,7 @@ PHP_METHOD(Microdb_Adapter_Pdo, __construct);
 PHP_METHOD(Microdb_Adapter_Pdo, connect);
 PHP_METHOD(Microdb_Adapter_Pdo, prepare);
 PHP_METHOD(Microdb_Adapter_Pdo, execPrepare);
+PHP_METHOD(Microdb_Adapter_Pdo, getVerison);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_microdb_adapter_pdo_setprefix, 0, 0, 1)
 	ZEND_ARG_INFO(0, prefix)
@@ -43,5 +44,6 @@ ZEPHIR_INIT_FUNCS(microdb_adapter_pdo_method_entry) {
 	PHP_ME(Microdb_Adapter_Pdo, connect, arginfo_microdb_adapter_pdo_connect, ZEND_ACC_PUBLIC)
 	PHP_ME(Microdb_Adapter_Pdo, prepare, arginfo_microdb_adapter_pdo_prepare, ZEND_ACC_PUBLIC)
 	PHP_ME(Microdb_Adapter_Pdo, execPrepare, arginfo_microdb_adapter_pdo_execprepare, ZEND_ACC_PUBLIC)
-	PHP_FE_END
+	PHP_ME(Microdb_Adapter_Pdo, getVerison, NULL, ZEND_ACC_PUBLIC)
+  PHP_FE_END
 };

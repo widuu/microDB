@@ -18,46 +18,6 @@
 
 namespace Microdb\Adapter;
 
-/**
- * database driver adapter 
- *
- */
+class Exception extends \Exception {
 
-abstract class Adapter{
-
-
-
-	/**
-	 * The function connect database , params must be array
-	 * <code>
-	 * $config = array(
-	 *		'username'  =>  'username',
-	 *		'password'  =>   'password',
-	 *		'host'	      =>   'localhost',
-	 *		'dbname'    =>   'test',
-	 *		'charset'     =>   'utf8',
-	 *		'prefix'        =>    'wd_',
-	 *		'options'     =>    array();
-	 *	);	
-	 * </code>
-	 * @author widuu <admin@widuu.com>
-	 */
-
-	abstract protected function connect( array! config = null);
-
-	/**
-	 * user can use this function parse database config to yourself
-	 * 
-	 *
-	 */
-
-	protected static  function parseConfig( var callback );
-
-	/**
-	 * get mysql server version
-	 *
-	 * @author widuu <admin@widuu.com>
-	 */
-
-	abstract protected function getVersion();
 }

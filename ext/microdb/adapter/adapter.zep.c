@@ -62,3 +62,12 @@ PHP_METHOD(Microdb_Adapter_Adapter, parseConfig) {
 
 }
 
+/**
+ * get mysql server version
+ *
+ * @author widuu <admin@widuu.com>
+ */
+PHP_METHOD(Microdb_Adapter_Adapter, getVersion) {
+
+}
+
