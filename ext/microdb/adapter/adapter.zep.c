@@ -12,6 +12,7 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
+#include "kernel/object.h"
 #include "kernel/memory.h"
 
 
@@ -23,7 +24,22 @@ ZEPHIR_INIT_CLASS(Microdb_Adapter_Adapter) {
 
 	ZEPHIR_REGISTER_CLASS(Microdb\\Adapter, Adapter, microdb, adapter_adapter, microdb_adapter_adapter_method_entry, ZEND_ACC_EXPLICIT_ABSTRACT_CLASS);
 
+	/**
+	 * sql execute error infomation
+	 */
+	zend_declare_property_null(microdb_adapter_adapter_ce, SL("_error"), ZEND_ACC_PUBLIC TSRMLS_CC);
+
 	return SUCCESS;
+
+}
+
+/**
+ * sql execute error infomation
+ */
+PHP_METHOD(Microdb_Adapter_Adapter, getError) {
+
+
+	RETURN_MEMBER(this_ptr, "_error");
 
 }
 
@@ -32,12 +48,13 @@ ZEPHIR_INIT_CLASS(Microdb_Adapter_Adapter) {
  * <code>
  * $config = array(
  *		'username'  =>  'username',
- *		'password'  =>   'password',
- *		'host'	      =>   'localhost',
- *		'dbname'    =>   'test',
- *		'charset'     =>   'utf8',
- *		'prefix'        =>    'wd_',
- *		'options'     =>    array();
+ *		'password'  =>  'password',
+ *		'host'	    =>  'localhost',
+ *		'dbname'    =>  'test',
+ *		'charset'   =>  'utf8',
+ *		'prefix'    =>  'wd_',
+ *		'options'   =>  array();
+ *
  *	);	
  * </code>
  * @author widuu <admin@widuu.com>
@@ -63,11 +80,19 @@ PHP_METHOD(Microdb_Adapter_Adapter, parseConfig) {
 }
 
 /**
- * get mysql server version
+ * get server database version
  *
  * @author widuu <admin@widuu.com>
  */
-PHP_METHOD(Microdb_Adapter_Adapter, getVersion) {
+PHP_METHOD(Microdb_Adapter_Adapter, dbVersion) {
+
+}
+
+/**
+ * get sql execute error infomation
+ * @author widuu <admin@widuu.com>
+ */
+PHP_METHOD(Microdb_Adapter_Adapter, error) {
 
 }
 

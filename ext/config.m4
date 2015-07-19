@@ -9,7 +9,7 @@ if test "$PHP_MICRODB" = "yes"; then
 	fi
 
 	AC_DEFINE(HAVE_MICRODB, 1, [Whether you have Microdb])
-	microdb_sources="microdb.c kernel/main.c kernel/memory.c kernel/exception.c kernel/hash.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/extended/array.c kernel/string.c kernel/fcall.c kernel/extended/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/time.c kernel/exit.c microdb/adapter/adapter.zep.c
+	microdb_sources="microdb.c kernel/main.c kernel/memory.c kernel/exception.c kernel/hash.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/extended/array.c kernel/string.c kernel/fcall.c kernel/extended/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/math.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/time.c kernel/exit.c microdb/adapter/adapter.zep.c
 	microdb/adapter/exception.zep.c
 	microdb/adapter/pdo.zep.c "
 	PHP_NEW_EXTENSION(microdb, $microdb_sources, $ext_shared,, )

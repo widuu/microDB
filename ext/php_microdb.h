@@ -14,7 +14,7 @@
 #define PHP_MICRODB_VERSION     "0.0.1"
 #define PHP_MICRODB_EXTNAME     "microdb"
 #define PHP_MICRODB_AUTHOR      "widuu <admin@widuu.com>"
-#define PHP_MICRODB_ZEPVERSION  "0.6.2a"
+#define PHP_MICRODB_ZEPVERSION  "0.7.1b"
 #define PHP_MICRODB_DESCRIPTION "php database framework written in c"
 
 
@@ -33,6 +33,8 @@ ZEND_BEGIN_MODULE_GLOBALS(microdb)
 
 	/** Function cache */
 	HashTable *fcache;
+
+	zephir_fcall_cache_entry *scache[ZEPHIR_MAX_CACHE_SLOTS];
 
 	/* Cache enabled */
 	unsigned int cache_enabled;

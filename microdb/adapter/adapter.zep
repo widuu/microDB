@@ -25,19 +25,24 @@ namespace Microdb\Adapter;
 
 abstract class Adapter{
 
+	/**
+	 * sql execute error infomation
+	 */
 
+	public _error { get };
 
 	/**
 	 * The function connect database , params must be array
 	 * <code>
 	 * $config = array(
 	 *		'username'  =>  'username',
-	 *		'password'  =>   'password',
-	 *		'host'	      =>   'localhost',
-	 *		'dbname'    =>   'test',
-	 *		'charset'     =>   'utf8',
-	 *		'prefix'        =>    'wd_',
-	 *		'options'     =>    array();
+	 *		'password'  =>  'password',
+	 *		'host'	    =>  'localhost',
+	 *		'dbname'    =>  'test',
+	 *		'charset'   =>  'utf8',
+	 *		'prefix'    =>  'wd_',
+	 *		'options'   =>  array();
+	 *
 	 *	);	
 	 * </code>
 	 * @author widuu <admin@widuu.com>
@@ -59,5 +64,13 @@ abstract class Adapter{
 	 * @author widuu <admin@widuu.com>
 	 */
 
-	 abstract protected function  dbVersion();
+	abstract protected function  dbVersion();
+
+	/**
+	 * get sql execute error infomation
+	 * @author widuu <admin@widuu.com>
+	 */
+
+	abstract protected function error();
+
 }

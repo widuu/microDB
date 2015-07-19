@@ -1,7 +1,7 @@
 <?php 
 
 /**
-  * example for database version
+  * example for database error infomation
   */
 use microdb\adapter\pdo as mypdo;
 
@@ -15,5 +15,13 @@ $db = new mypdo(
 		)
 	);
 
+// mysql database don't exists table widuu 
 
-echo $db->dbVersion();
+$db->prepare("select * from widuu");
+$execresult = $db->execPrepare();
+
+if ( !$execresult ){
+	echo $db->getError();
+}
+
+echo "\n";

@@ -91,6 +91,12 @@ class Pdo extends Adapter{
 
 	protected _prefix { get,set };
 
+	/**
+	 * active pod statement
+	 */
+
+	protected _activeStatement = null { get };
+
 
 	public function __construct( array! config = null ){
 	 	if empty( config ) {
@@ -105,12 +111,12 @@ class Pdo extends Adapter{
 	 * <code>
 	 * $config = array(
 	 *		'username'  =>  'username',
-	 *		'password'  =>   'password',
-	 *		'host'	      =>   'localhost',
-	 *		'dbname'    =>   'test',
-	 *		'charset'     =>   'utf8',
-	 *		'prefix'        =>    'wd_',
-	 *		'options'     =>    array();
+	 *		'password'  =>  'password',
+	 *		'host'	    =>  'localhost',
+	 *		'dbname'    =>  'test',
+	 *		'charset'   =>  'utf8',
+	 *		'prefix'    =>  'wd_',
+	 *		'options'   =>  array();
 	 *
 	 *	);	
 	 * </code>
@@ -152,7 +158,7 @@ class Pdo extends Adapter{
 		}
 
 		//add pdo exception
-		let options[\Pdo::ATTR_ERRMODE] = \Pdo::ERRMODE_EXCEPTION;
+		//let options[\Pdo::ATTR_ERRMODE] = \Pdo::ERRMODE_EXCEPTION;
 
 		//create pdo connect
 		return new \PDO("mysql:".dsn,username,password,options);		 
@@ -170,31 +176,39 @@ class Pdo extends Adapter{
 	 */
 
 	public function prepare( string ! sqlStr ) -> <\PDOStatement> {
-		return this->_pdo->prepare(sqlStr);
+		this->freePdostatement();
+		let this->_activeStatement = this->_pdo->prepare( sqlStr );
+		//return this->_pdo->prepare(sqlStr);
+		return this->_activeStatement;
 	}
 
 	/**
 	 * executes prepare pdo statment and return PDOStatement
-	 * @param 	PDOStatement		statement  <PDO execute prepare result>
+	 * //@param 	PDOStatement		statement  <PDO execute prepare result>
 	 * @param 	array			dataValue  <PDO bindVaue>
 	 * @param 	array			dataTypes  <PDO data_type>
 	 * @return 	PDOStatement 	
 	 * <code>
-	 * $statement = $db->prepare("select * from user where HOST= ? ");
-	 * $execresult = $db->execPrepare( $statement , array('widuu') ,array(  mypdo::TYPE_STR ));
+	 * $db->prepare("select * from user where HOST= ? ");
+	 * $execresult = $db->execPrepare(  array('widuu') ,array(  mypdo::TYPE_STR ));
 	 * //or
-	 * $statement = $db->prepare("select * from user where HOST=:host");
-	 * $execresult = $db->execPrepare( $statement , array('host'=>'widuu') ,array( 'host' => mypdo::STR ));
+	 * $db->prepare("select * from user where HOST=:host");
+	 * $execresult = $db->execPrepare(  array('host'=>'widuu') ,array( 'host' => mypdo::STR ));
 	 * </code>
 	 */
 
-	public function execPrepare(<\PDOStatement> statement ,array ! dataValue , dataTypes = null)-> <\PDOStatement> {
+	//public function execPrepare(<\PDOStatement> statement ,array ! dataValue , dataTypes = null)-> <\PDOStatement> {
+	public function execPrepare( array ! dataValue = null, dataTypes = null )-> <\PDOStatement> | boolean | boolean{
 		
-		var key,value,parameter,variable,type;
+		var key,value,parameter,variable,type,result;
 
-		if typeof statement != "object" || ! ( statement instanceof \PDOStatement ){
-			throw new \Exception("PDOStatement type error");
-			return;
+		// if typeof statement != "object" || ! ( statement instanceof \PDOStatement ){
+		// 	throw new \Exception("PDOStatement type error");
+		// 	return;
+		// }
+
+		if  this->_activeStatement == null || typeof this->_activeStatement != "object" {
+			throw new \Exception( "don't exists PDOStatement" );
 		}
 
 		for key , value in dataValue {
@@ -232,28 +246,64 @@ class Pdo extends Adapter{
 							type = Pdo::TYPE_DECIMAL;
 				}
 
-				statement->bindValue( parameter , variable , type );	
+				//statement->bindValue( parameter , variable , type );	
+				this->_activeStatement->bindValue( parameter , variable , type );	
 			}else{
-				statement->bindValue( parameter , value );
+				//statement->bindValue( parameter , value );
+				this->_activeStatement->bindValue( parameter , value );
 			}
 			
 		}
-		statement->execute();
-		return statement;
+		// statement->execute();
+		let result = this->_activeStatement->execute();
+		
+		// execute false
+		if false === result {
+			this->error();
+			return false;
+		}
+
+		// let this->_active_statement = statement;
+		return this->_activeStatement;
 	}
 
 	/**
 	 * get server database version
-	 * 
+	 * <code>
+	 * echo $db->dbversion();
+	 * </code>
 	 * @author widuu <admin@widuu.com>
 	 */
 
-	public function dbVersion() -> boolean | string {
+	public function dbVersion() -> string {
 		if !isset this->_pdo {
 			throw new Exception( "database service don't connect" );
-			return false;
 		}
 		return this->_pdo->getAttribute(4);
+	}
+
+	/**
+	 * free pdo statement
+	 * @author widuu <admin@widuu.com>
+	 */
+
+	private function freePdostatement() {
+		let this->_activeStatement = null;
+	}
+
+	/**
+	 * get sql execute error infomation
+	 * @author widuu <admin@widuu.com>
+	 */
+
+	protected function error() {
+		var error;
+		if this->_activeStatement {
+			let error = this->_activeStatement->errorInfo(),
+				this->_error = "SQLSTATE[".error[0]."]: ".error[2];
+		}else{
+			let this->_error = "";
+		}
 	}
 
 }

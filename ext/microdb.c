@@ -20,6 +20,7 @@
 #include <Zend/zend_exceptions.h>
 #include <Zend/zend_interfaces.h>
 
+#include "kernel/globals.h"
 #include "kernel/main.h"
 #include "kernel/fcall.h"
 #include "kernel/memory.h"
@@ -31,6 +32,10 @@ zend_class_entry *microdb_adapter_exception_ce;
 zend_class_entry *microdb_adapter_pdo_ce;
 
 ZEND_DECLARE_MODULE_GLOBALS(microdb)
+
+PHP_INI_BEGIN()
+	
+PHP_INI_END()
 
 static PHP_MINIT_FUNCTION(microdb)
 {
@@ -49,7 +54,7 @@ static PHP_MINIT_FUNCTION(microdb)
 
 	setlocale(LC_ALL, "C");
 #endif
-
+	REGISTER_INI_ENTRIES();
 	ZEPHIR_INIT(Microdb_Adapter_Adapter);
 	ZEPHIR_INIT(Microdb_Adapter_Exception);
 	ZEPHIR_INIT(Microdb_Adapter_Pdo);
@@ -66,7 +71,7 @@ static PHP_MSHUTDOWN_FUNCTION(microdb)
 {
 
 	zephir_deinitialize_memory(TSRMLS_C);
-
+	UNREGISTER_INI_ENTRIES();
 	return SUCCESS;
 }
 #endif
@@ -74,21 +79,24 @@ static PHP_MSHUTDOWN_FUNCTION(microdb)
 /**
  * Initialize globals on each request or each thread started
  */
-static void php_zephir_init_globals(zend_microdb_globals *zephir_globals TSRMLS_DC)
+static void php_zephir_init_globals(zend_microdb_globals *microdb_globals TSRMLS_DC)
 {
-	zephir_globals->initialized = 0;
+	microdb_globals->initialized = 0;
 
 	/* Memory options */
-	zephir_globals->active_memory = NULL;
+	microdb_globals->active_memory = NULL;
 
 	/* Virtual Symbol Tables */
-	zephir_globals->active_symbol_table = NULL;
+	microdb_globals->active_symbol_table = NULL;
 
 	/* Cache Enabled */
-	zephir_globals->cache_enabled = 1;
+	microdb_globals->cache_enabled = 1;
 
 	/* Recursive Lock */
-	zephir_globals->recursive_lock = 0;
+	microdb_globals->recursive_lock = 0;
+
+	/* Static cache */
+	memset(microdb_globals->scache, '\0', sizeof(zephir_fcall_cache_entry*) * ZEPHIR_MAX_CACHE_SLOTS);
 
 
 }
@@ -96,12 +104,13 @@ static void php_zephir_init_globals(zend_microdb_globals *zephir_globals TSRMLS_
 static PHP_RINIT_FUNCTION(microdb)
 {
 
-	zend_microdb_globals *zephir_globals_ptr = ZEPHIR_VGLOBAL;
+	zend_microdb_globals *microdb_globals_ptr = ZEPHIR_VGLOBAL;
 
-	php_zephir_init_globals(zephir_globals_ptr TSRMLS_CC);
+	php_zephir_init_globals(microdb_globals_ptr TSRMLS_CC);
 	//zephir_init_interned_strings(TSRMLS_C);
 
-	zephir_initialize_memory(zephir_globals_ptr TSRMLS_CC);
+	zephir_initialize_memory(microdb_globals_ptr TSRMLS_CC);
+
 
 	return SUCCESS;
 }
@@ -125,9 +134,11 @@ static PHP_MINFO_FUNCTION(microdb)
 	php_info_print_table_header(2, PHP_MICRODB_NAME, "enabled");
 	php_info_print_table_row(2, "Author", PHP_MICRODB_AUTHOR);
 	php_info_print_table_row(2, "Version", PHP_MICRODB_VERSION);
+	php_info_print_table_row(2, "Build Date", __DATE__ " " __TIME__ );
+	php_info_print_table_row(2, "Powered by Zephir", "Version " PHP_MICRODB_ZEPVERSION);
 	php_info_print_table_end();
 
-
+	DISPLAY_INI_ENTRIES();
 }
 
 static PHP_GINIT_FUNCTION(microdb)

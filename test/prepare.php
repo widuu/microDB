@@ -15,17 +15,14 @@ $db = new mypdo(
 		)
 	);
 
-//you can use this 
-$statement = $db->prepare("select * from user where host=:host");
-$execresult = $db->execPrepare( $statement , array(':host'=>'localhost') , array( ':host' => mypdo::TYPE_STR, ));
+// you can use this 
+$db->prepare("select * from user where host=:host");
+$execresult = @$db->execPrepare( array('host'=>'localhost') , array( ':host' => mypdo::TYPE_STR, ));
+
 // or 
 
-// $statement = $db->prepare("select * from user where host= ? ");
-// $execresult = $db->execPrepare( $statement , array('localhost') ,array(  mypdo::TYPE_STR ));
-
-if ( !$execresult ){
-	echo "Sql query string error\n";
-}
+// $db->prepare("select * from user where host= ? ");
+// $execresult = $db->execPrepare( array('localhost') ,array(  mypdo::TYPE_STR ));
 
 $result = $execresult->fetchAll();
 
