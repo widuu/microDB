@@ -13,9 +13,9 @@
 
 #include "kernel/main.h"
 #include "kernel/object.h"
-#include "kernel/memory.h"
 #include "kernel/operators.h"
 #include "kernel/exception.h"
+#include "kernel/memory.h"
 #include "kernel/fcall.h"
 #include "ext/spl/spl_exceptions.h"
 #include "kernel/array.h"
@@ -47,11 +47,6 @@ ZEPHIR_INIT_CLASS(Microdb_Adapter_Pdo) {
 	 * Pdo resource
 	 */
 	zend_declare_property_null(microdb_adapter_pdo_ce, SL("_pdo"), ZEND_ACC_PROTECTED TSRMLS_CC);
-
-	/**
-	 * database prefix
-	 */
-	zend_declare_property_null(microdb_adapter_pdo_ce, SL("_prefix"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
 	 * active pod statement
@@ -118,31 +113,6 @@ PHP_METHOD(Microdb_Adapter_Pdo, getPdo) {
 }
 
 /**
- * database prefix
- */
-PHP_METHOD(Microdb_Adapter_Pdo, getPrefix) {
-
-
-	RETURN_MEMBER(this_ptr, "_prefix");
-
-}
-
-/**
- * database prefix
- */
-PHP_METHOD(Microdb_Adapter_Pdo, setPrefix) {
-
-	zval *prefix;
-
-	zephir_fetch_params(0, 1, 0, &prefix);
-
-
-
-	zephir_update_property_this(this_ptr, SL("_prefix"), prefix TSRMLS_CC);
-
-}
-
-/**
  * active pod statement
  */
 PHP_METHOD(Microdb_Adapter_Pdo, getActiveStatement) {
@@ -171,7 +141,7 @@ PHP_METHOD(Microdb_Adapter_Pdo, __construct) {
 
 
 	if (ZEPHIR_IS_EMPTY(config)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(microdb_adapter_exception_ce, "params must be array", "microdb/adapter/pdo.zep", 103);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(microdb_adapter_exception_ce, "params must be array", "microdb/adapter/pdo.zep", 98);
 		return;
 	}
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "connect", NULL, 0, config);
@@ -233,7 +203,7 @@ PHP_METHOD(Microdb_Adapter_Pdo, connect) {
 		array_init(options);
 	}
 	if (zephir_array_isset_string(config, SS("prefix"))) {
-		zephir_array_fetch_string(&_0, config, SL("prefix"), PH_NOISY | PH_READONLY, "microdb/adapter/pdo.zep", 147 TSRMLS_CC);
+		zephir_array_fetch_string(&_0, config, SL("prefix"), PH_NOISY | PH_READONLY, "microdb/adapter/pdo.zep", 142 TSRMLS_CC);
 		zephir_update_property_this(this_ptr, SL("_prefix"), _0 TSRMLS_CC);
 		zephir_array_unset_string(&config, SS("prefix"), PH_SEPARATE);
 	}
@@ -241,7 +211,7 @@ PHP_METHOD(Microdb_Adapter_Pdo, connect) {
 	if (!(zephir_array_isset_string_fetch(&dsn, config, SS("dsn"), 0 TSRMLS_CC))) {
 		ZEPHIR_INIT_VAR(dsnparts);
 		array_init(dsnparts);
-		zephir_is_iterable(config, &_2, &_1, 0, 0, "microdb/adapter/pdo.zep", 157);
+		zephir_is_iterable(config, &_2, &_1, 0, 0, "microdb/adapter/pdo.zep", 152);
 		for (
 		  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
 		  ; zephir_hash_move_forward_ex(_2, &_1)
@@ -250,7 +220,7 @@ PHP_METHOD(Microdb_Adapter_Pdo, connect) {
 			ZEPHIR_GET_HVALUE(value, _3);
 			ZEPHIR_INIT_LNVAR(_4);
 			ZEPHIR_CONCAT_VSV(_4, key, "=", value);
-			zephir_array_append(&dsnparts, _4, PH_SEPARATE, "microdb/adapter/pdo.zep", 155);
+			zephir_array_append(&dsnparts, _4, PH_SEPARATE, "microdb/adapter/pdo.zep", 150);
 		}
 		ZEPHIR_INIT_NVAR(dsn);
 		zephir_fast_join_str(dsn, SL(";"), dsnparts TSRMLS_CC);
@@ -265,7 +235,7 @@ PHP_METHOD(Microdb_Adapter_Pdo, connect) {
 }
 
 /**
- *  return pdo prepare statement 
+ * return pdo prepare statement 
  * @param     string      sqlStr
  * @return     object      PDOStatement
  * <code>
@@ -354,10 +324,10 @@ PHP_METHOD(Microdb_Adapter_Pdo, execPrepare) {
 		_1 = Z_TYPE_P(_2) != IS_OBJECT;
 	}
 	if (_1) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "don't exists PDOStatement", "microdb/adapter/pdo.zep", 211);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "don't exists PDOStatement", "microdb/adapter/pdo.zep", 206);
 		return;
 	}
-	zephir_is_iterable(dataValue, &_4, &_3, 0, 0, "microdb/adapter/pdo.zep", 258);
+	zephir_is_iterable(dataValue, &_4, &_3, 0, 0, "microdb/adapter/pdo.zep", 253);
 	for (
 	  ; zephir_hash_get_current_data_ex(_4, (void**) &_5, &_3) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_4, &_3)
@@ -454,7 +424,7 @@ PHP_METHOD(Microdb_Adapter_Pdo, dbVersion) {
 	ZEPHIR_MM_GROW();
 
 	if (!(zephir_isset_property(this_ptr, SS("_pdo") TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(microdb_adapter_exception_ce, "database service don't connect", "microdb/adapter/pdo.zep", 280);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(microdb_adapter_exception_ce, "database service don't connect", "microdb/adapter/pdo.zep", 275);
 		return;
 	}
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("_pdo"), PH_NOISY_CC);
@@ -493,8 +463,8 @@ PHP_METHOD(Microdb_Adapter_Pdo, error) {
 		_1 = zephir_fetch_nproperty_this(this_ptr, SL("_activeStatement"), PH_NOISY_CC);
 		ZEPHIR_CALL_METHOD(&error, _1, "errorinfo", NULL, 0);
 		zephir_check_call_status();
-		zephir_array_fetch_long(&_2, error, 0, PH_NOISY | PH_READONLY, "microdb/adapter/pdo.zep", 303 TSRMLS_CC);
-		zephir_array_fetch_long(&_3, error, 2, PH_NOISY | PH_READONLY, "microdb/adapter/pdo.zep", 303 TSRMLS_CC);
+		zephir_array_fetch_long(&_2, error, 0, PH_NOISY | PH_READONLY, "microdb/adapter/pdo.zep", 298 TSRMLS_CC);
+		zephir_array_fetch_long(&_3, error, 2, PH_NOISY | PH_READONLY, "microdb/adapter/pdo.zep", 298 TSRMLS_CC);
 		ZEPHIR_INIT_VAR(_4);
 		ZEPHIR_CONCAT_SVSV(_4, "SQLSTATE[", _2, "]: ", _3);
 		zephir_update_property_this(this_ptr, SL("_error"), _4 TSRMLS_CC);

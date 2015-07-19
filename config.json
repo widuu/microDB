@@ -59,5 +59,15 @@
     "verbose": false,
     "requires": {
         "extensions": []
+    },
+    "globals": {
+        "microdb_use_dsn": {
+            "type": "bool",
+            "default": false,
+            "ini-entry": {
+                "name": "microdb.use_dsn",
+                "scope": "PHP_INI_ALL"
+            }
+        }
     }
 }

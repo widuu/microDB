@@ -29,6 +29,11 @@ ZEPHIR_INIT_CLASS(Microdb_Adapter_Adapter) {
 	 */
 	zend_declare_property_null(microdb_adapter_adapter_ce, SL("_error"), ZEND_ACC_PUBLIC TSRMLS_CC);
 
+	/**
+	 * database prefix
+	 */
+	zend_declare_property_null(microdb_adapter_adapter_ce, SL("_prefix"), ZEND_ACC_PROTECTED TSRMLS_CC);
+
 	return SUCCESS;
 
 }
@@ -40,6 +45,31 @@ PHP_METHOD(Microdb_Adapter_Adapter, getError) {
 
 
 	RETURN_MEMBER(this_ptr, "_error");
+
+}
+
+/**
+ * database prefix
+ */
+PHP_METHOD(Microdb_Adapter_Adapter, getPrefix) {
+
+
+	RETURN_MEMBER(this_ptr, "_prefix");
+
+}
+
+/**
+ * database prefix
+ */
+PHP_METHOD(Microdb_Adapter_Adapter, setPrefix) {
+
+	zval *prefix;
+
+	zephir_fetch_params(0, 1, 0, &prefix);
+
+
+
+	zephir_update_property_this(this_ptr, SL("_prefix"), prefix TSRMLS_CC);
 
 }
 

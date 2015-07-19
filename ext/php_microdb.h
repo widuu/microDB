@@ -47,6 +47,9 @@ ZEND_BEGIN_MODULE_GLOBALS(microdb)
 	zval *global_false;
 	zval *global_null;
 	
+	zend_bool microdb_use_dsn;
+
+
 ZEND_END_MODULE_GLOBALS(microdb)
 
 #ifdef ZTS

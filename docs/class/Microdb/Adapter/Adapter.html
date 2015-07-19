@@ -104,6 +104,51 @@
                 
     </div>
     <div class="method-summary">
+        <span class="method-name"><a href="#method-details-getError">getError</a></span>()
+                <div class="summary-text">sql execute error infomation</div>
+            </div>
+
+</li>
+    
+        
+<li class="class-method clearfix">
+
+    <div class="method-return">
+
+        
+                
+    </div>
+    <div class="method-summary">
+        <span class="method-name"><a href="#method-details-getPrefix">getPrefix</a></span>()
+                <div class="summary-text">database prefix</div>
+            </div>
+
+</li>
+    
+        
+<li class="class-method clearfix">
+
+    <div class="method-return">
+
+        
+                
+    </div>
+    <div class="method-summary">
+        <span class="method-name"><a href="#method-details-setPrefix">setPrefix</a></span>(<span class="param-data-type">variable</span>  <span class="param-name">$prefix</span>)
+                <div class="summary-text">database prefix</div>
+            </div>
+
+</li>
+    
+        
+<li class="class-method clearfix">
+
+    <div class="method-return">
+
+        
+                
+    </div>
+    <div class="method-summary">
         <span class="method-name"><a href="#method-details-connect">connect</a></span>(<span class="param-data-type">array</span>  <span class="param-name">$config</span>)
                 <div class="summary-text">The function connect database , params must be array</div>
             </div>
@@ -124,11 +169,143 @@
             </div>
 
 </li>
+    
+        
+<li class="class-method clearfix">
+
+    <div class="method-return">
+
+        
+                
+    </div>
+    <div class="method-summary">
+        <span class="method-name"><a href="#method-details-dbVersion">dbVersion</a></span>()
+                <div class="summary-text">get server database version</div>
+            </div>
+
+</li>
+    
+        
+<li class="class-method clearfix">
+
+    <div class="method-return">
+
+        
+                
+    </div>
+    <div class="method-summary">
+        <span class="method-name"><a href="#method-details-error">error</a></span>()
+                <div class="summary-text">get sql execute error infomation</div>
+            </div>
+
+</li>
     </ul>
 
 <div class="hidden-anchor"  id="methods-details"></div>
 <div class="methods-summary standard-bandeau">Methods Details</div>
 <ul class="method-details-list">
+    
+        
+<li class="class-method clearfix">
+
+    <div class="hidden-anchor"  id="method-details-getError"></div>
+    
+    <div class="method-details">
+        
+
+        
+
+        <div class="method-details-details">
+            <div class="method-signature">
+
+                
+                                    
+                <span class="visibility-public">public</span>
+                
+                                
+                function <h3 class="method-name">getError</h3>()
+                
+                                
+                    <div>
+                    sql execute error infomation                    </div>
+                    <div>
+                                        </div>
+                
+                                
+            </div>
+        </div>
+
+    </div>
+
+</li>
+    
+        
+<li class="class-method clearfix">
+
+    <div class="hidden-anchor"  id="method-details-getPrefix"></div>
+    
+    <div class="method-details">
+        
+
+        
+
+        <div class="method-details-details">
+            <div class="method-signature">
+
+                
+                                    
+                <span class="visibility-public">public</span>
+                
+                                
+                function <h3 class="method-name">getPrefix</h3>()
+                
+                                
+                    <div>
+                    database prefix                    </div>
+                    <div>
+                                        </div>
+                
+                                
+            </div>
+        </div>
+
+    </div>
+
+</li>
+    
+        
+<li class="class-method clearfix">
+
+    <div class="hidden-anchor"  id="method-details-setPrefix"></div>
+    
+    <div class="method-details">
+        
+
+        
+
+        <div class="method-details-details">
+            <div class="method-signature">
+
+                
+                                    
+                <span class="visibility-public">public</span>
+                
+                                
+                function <h3 class="method-name">setPrefix</h3>(<span class="param-data-type">variable</span>  <span class="param-name">$prefix</span>)
+                
+                                
+                    <div>
+                    database prefix                    </div>
+                    <div>
+                                        </div>
+                
+                                
+            </div>
+        </div>
+
+    </div>
+
+</li>
     
         
 <li class="class-method clearfix">
@@ -160,12 +337,13 @@
                     <code>
 	 $config = array(
 	 		'username'  =>  'username',
-	 		'password'  =>   'password',
-	 		'host'	      =>   'localhost',
-	 		'dbname'    =>   'test',
-	 		'charset'     =>   'utf8',
-	 		'prefix'        =>    'wd_',
-	 		'options'     =>    array();
+	 		'password'  =>  'password',
+	 		'host'	    =>  'localhost',
+	 		'dbname'    =>  'test',
+	 		'charset'   =>  'utf8',
+	 		'prefix'    =>  'wd_',
+	 		'options'   =>  array();
+	 
 	 	);	
 	 </code>                    </div>
                 
@@ -203,6 +381,80 @@
                                 
                     <div>
                     user can use this function parse database config to yourself                    </div>
+                    <div>
+                                        </div>
+                
+                                
+            </div>
+        </div>
+
+    </div>
+
+</li>
+    
+        
+<li class="class-method clearfix">
+
+    <div class="hidden-anchor"  id="method-details-dbVersion"></div>
+    
+    <div class="method-details">
+        
+
+        
+
+        <div class="method-details-details">
+            <div class="method-signature">
+
+                
+                                    
+                <span class="visibility-abstract">abstract</span>
+                
+                                    
+                <span class="visibility-protected">protected</span>
+                
+                                
+                function <h3 class="method-name">dbVersion</h3>()
+                
+                                
+                    <div>
+                    get server database version                    </div>
+                    <div>
+                                        </div>
+                
+                                
+            </div>
+        </div>
+
+    </div>
+
+</li>
+    
+        
+<li class="class-method clearfix">
+
+    <div class="hidden-anchor"  id="method-details-error"></div>
+    
+    <div class="method-details">
+        
+
+        
+
+        <div class="method-details-details">
+            <div class="method-signature">
+
+                
+                                    
+                <span class="visibility-abstract">abstract</span>
+                
+                                    
+                <span class="visibility-protected">protected</span>
+                
+                                
+                function <h3 class="method-name">error</h3>()
+                
+                                
+                    <div>
+                    get sql execute error infomation                    </div>
                     <div>
                                         </div>
                 

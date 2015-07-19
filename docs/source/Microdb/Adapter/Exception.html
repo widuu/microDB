@@ -61,7 +61,7 @@
         <li><a href="../../../index.html">Home</a></li>
         
                 <li><a href="../../../classes.html">Classes</a></li>
-                <li><a href="../../../class/Microdb/Adapter/Adapter.html">Microdb\Adapter\Adapter</a></li>
+                <li><a href="../../../class/Microdb/Adapter/Exception.html">Microdb\Adapter\Exception</a></li>
                 <li><a >Source</a></li>
                 
     </ul>
@@ -70,9 +70,9 @@
 <div class="class-header source clearfix">
     
     <div class="access-buttons">
-        <a class="zep-button" href="../../../class/Microdb/Adapter/Adapter.html">Class</a>
+        <a class="zep-button" href="../../../class/Microdb/Adapter/Exception.html">Class</a>
 
-                <a class="zep-button" href="https://github.com/widuu/microDB/tree/master/microdb/adapter/adapter.zep">Github</a>
+                <a class="zep-button" href="https://github.com/widuu/microDB/tree/master/microdb/adapter/exception.zep">Github</a>
             </div>
     
     <div class="class-full-name">
@@ -85,7 +85,7 @@
                 <span class="namespace-piece">
             <a href="../../../namespace/Microdb/Adapter.html">Adapter</a>
         </span>
-                <h1 class="class-name">Adapter</h1>
+                <h1 class="class-name">Exception</h1>
     </div>
     
 </div>
@@ -111,70 +111,9 @@
 
 namespace Microdb\Adapter;
 
-/**
- * database driver adapter 
- *
- */
-
-abstract class Adapter{
-
-	/**
-	 * sql execute error infomation
-	 */
-
-	public _error { get };
-
-	/**
-	  * database prefix
-	  */
-
-	protected _prefix { get,set };
-
-
-	/**
-	 * The function connect database , params must be array
-	 * <code>
-	 * $config = array(
-	 *		'username'  =>  'username',
-	 *		'password'  =>  'password',
-	 *		'host'	    =>  'localhost',
-	 *		'dbname'    =>  'test',
-	 *		'charset'   =>  'utf8',
-	 *		'prefix'    =>  'wd_',
-	 *		'options'   =>  array();
-	 *
-	 *	);	
-	 * </code>
-	 * @author widuu <admin@widuu.com>
-	 */
-
-	abstract protected function connect( array! config = null);
-
-	/**
-	 * user can use this function parse database config to yourself
-	 * 
-	 *
-	 */
-
-	protected static  function parseConfig( var callback );
-
-	/**
-	 * get server database version
-	 *
-	 * @author widuu <admin@widuu.com>
-	 */
-
-	abstract protected function  dbVersion();
-
-	/**
-	 * get sql execute error infomation
-	 * @author widuu <admin@widuu.com>
-	 */
-
-	abstract protected function error();
-
-}
-</pre>                </div>
+class Exception extends \Exception {
+	
+}</pre>                </div>
             </div>
 
         </div>

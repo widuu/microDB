@@ -34,7 +34,7 @@ zend_class_entry *microdb_adapter_pdo_ce;
 ZEND_DECLARE_MODULE_GLOBALS(microdb)
 
 PHP_INI_BEGIN()
-	
+	STD_PHP_INI_BOOLEAN("microdb.usedsn", "0", PHP_INI_ALL, OnUpdateBool, microdb_use_dsn, zend_microdb_globals, microdb_globals)
 PHP_INI_END()
 
 static PHP_MINIT_FUNCTION(microdb)
@@ -98,6 +98,7 @@ static void php_zephir_init_globals(zend_microdb_globals *microdb_globals TSRMLS
 	/* Static cache */
 	memset(microdb_globals->scache, '\0', sizeof(zephir_fcall_cache_entry*) * ZEPHIR_MAX_CACHE_SLOTS);
 
+	microdb_globals->microdb_use_dsn = 0;
 
 }
 
@@ -135,7 +136,7 @@ static PHP_MINFO_FUNCTION(microdb)
 	php_info_print_table_row(2, "Author", PHP_MICRODB_AUTHOR);
 	php_info_print_table_row(2, "Version", PHP_MICRODB_VERSION);
 	php_info_print_table_row(2, "Build Date", __DATE__ " " __TIME__ );
-	php_info_print_table_row(2, "Powered by Zephir", "Version " PHP_MICRODB_ZEPVERSION);
+	//php_info_print_table_row(2, "Powered by Zephir", "Version " PHP_MICRODB_ZEPVERSION);
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

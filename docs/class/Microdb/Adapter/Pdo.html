@@ -134,23 +134,8 @@
                 
     </div>
     <div class="method-summary">
-        <span class="method-name"><a href="#method-details-getPrefix">getPrefix</a></span>()
-                <div class="summary-text">database prefix</div>
-            </div>
-
-</li>
-    
-        
-<li class="class-method clearfix">
-
-    <div class="method-return">
-
-        
-                
-    </div>
-    <div class="method-summary">
-        <span class="method-name"><a href="#method-details-setPrefix">setPrefix</a></span>(<span class="param-data-type">variable</span>  <span class="param-name">$prefix</span>)
-                <div class="summary-text">database prefix</div>
+        <span class="method-name"><a href="#method-details-getActiveStatement">getActiveStatement</a></span>()
+                <div class="summary-text">active pod statement</div>
             </div>
 
 </li>
@@ -204,12 +189,57 @@
 
     <div class="method-return">
 
-        PDOStatement
+        PDOStatement|bool
                 
     </div>
     <div class="method-summary">
-        <span class="method-name"><a href="#method-details-execPrepare">execPrepare</a></span>(<span class="param-data-type">variable</span>  <span class="param-name">$statement</span>,<span class="param-data-type">array</span>  <span class="param-name">$dataValue</span>,<span class="param-data-type">variable</span>  <span class="param-name">$dataTypes</span>)
-                <div class="summary-text">executes prepare</div>
+        <span class="method-name"><a href="#method-details-execPrepare">execPrepare</a></span>(<span class="param-data-type">array</span>  <span class="param-name">$dataValue</span>,<span class="param-data-type">variable</span>  <span class="param-name">$dataTypes</span>)
+                <div class="summary-text">executes prepare pdo statment and return PDOStatement</div>
+            </div>
+
+</li>
+    
+        
+<li class="class-method clearfix">
+
+    <div class="method-return">
+
+        string
+                
+    </div>
+    <div class="method-summary">
+        <span class="method-name"><a href="#method-details-dbVersion">dbVersion</a></span>()
+                <div class="summary-text">get server database version</div>
+            </div>
+
+</li>
+    
+        
+<li class="class-method clearfix">
+
+    <div class="method-return">
+
+        
+                
+    </div>
+    <div class="method-summary">
+        <span class="method-name"><a href="#method-details-freePdostatement">freePdostatement</a></span>()
+                <div class="summary-text">free pdo statement</div>
+            </div>
+
+</li>
+    
+        
+<li class="class-method clearfix">
+
+    <div class="method-return">
+
+        
+                
+    </div>
+    <div class="method-summary">
+        <span class="method-name"><a href="#method-details-error">error</a></span>()
+                <div class="summary-text">get sql execute error infomation</div>
             </div>
 
 </li>
@@ -290,7 +320,7 @@
         
 <li class="class-method clearfix">
 
-    <div class="hidden-anchor"  id="method-details-getPrefix"></div>
+    <div class="hidden-anchor"  id="method-details-getActiveStatement"></div>
     
     <div class="method-details">
         
@@ -305,45 +335,11 @@
                 <span class="visibility-public">public</span>
                 
                                 
-                function <h3 class="method-name">getPrefix</h3>()
+                function <h3 class="method-name">getActiveStatement</h3>()
                 
                                 
                     <div>
-                    database prefix                    </div>
-                    <div>
-                                        </div>
-                
-                                
-            </div>
-        </div>
-
-    </div>
-
-</li>
-    
-        
-<li class="class-method clearfix">
-
-    <div class="hidden-anchor"  id="method-details-setPrefix"></div>
-    
-    <div class="method-details">
-        
-
-        
-
-        <div class="method-details-details">
-            <div class="method-signature">
-
-                
-                                    
-                <span class="visibility-public">public</span>
-                
-                                
-                function <h3 class="method-name">setPrefix</h3>(<span class="param-data-type">variable</span>  <span class="param-name">$prefix</span>)
-                
-                                
-                    <div>
-                    database prefix                    </div>
+                    active pod statement                    </div>
                     <div>
                                         </div>
                 
@@ -410,11 +406,12 @@
                     <code>
 	 $config = array(
 	 		'username'  =>  'username',
-	 		'password'  =>   'password',
-	 		'host'	      =>   'localhost',
-	 		'dbname'    =>   'test',
-	 		'charset'     =>   'utf8',
-	 		'prefix'        =>    'wd_',
+	 		'password'  =>  'password',
+	 		'host'	    =>  'localhost',
+	 		'dbname'    =>  'test',
+	 		'charset'   =>  'utf8',
+	 		'prefix'    =>  'wd_',
+	 		'options'   =>  array();
 	 
 	 	);	
 	 </code>                    </div>
@@ -479,11 +476,115 @@
                 <span class="visibility-public">public</span>
                 
                                 
-                function <h3 class="method-name">execPrepare</h3>(<span class="param-data-type">variable</span>  <span class="param-name">$statement</span>,<span class="param-data-type">array</span>  <span class="param-name">$dataValue</span>,<span class="param-data-type">variable</span>  <span class="param-name">$dataTypes</span>)
+                function <h3 class="method-name">execPrepare</h3>(<span class="param-data-type">array</span>  <span class="param-name">$dataValue</span>,<span class="param-data-type">variable</span>  <span class="param-name">$dataTypes</span>)
                 
                                 
                     <div>
-                    executes prepare                    </div>
+                    executes prepare pdo statment and return PDOStatement                    </div>
+                    <div>
+                    //                    </div>
+                
+                                
+            </div>
+        </div>
+
+    </div>
+
+</li>
+    
+        
+<li class="class-method clearfix">
+
+    <div class="hidden-anchor"  id="method-details-dbVersion"></div>
+    
+    <div class="method-details">
+        
+
+        
+
+        <div class="method-details-details">
+            <div class="method-signature">
+
+                
+                                    
+                <span class="visibility-public">public</span>
+                
+                                
+                function <h3 class="method-name">dbVersion</h3>()
+                
+                                
+                    <div>
+                    get server database version                    </div>
+                    <div>
+                    <code>
+	 echo $db->dbversion();
+	 </code>                    </div>
+                
+                                
+            </div>
+        </div>
+
+    </div>
+
+</li>
+    
+        
+<li class="class-method clearfix">
+
+    <div class="hidden-anchor"  id="method-details-freePdostatement"></div>
+    
+    <div class="method-details">
+        
+
+        
+
+        <div class="method-details-details">
+            <div class="method-signature">
+
+                
+                                    
+                <span class="visibility-private">private</span>
+                
+                                
+                function <h3 class="method-name">freePdostatement</h3>()
+                
+                                
+                    <div>
+                    free pdo statement                    </div>
+                    <div>
+                                        </div>
+                
+                                
+            </div>
+        </div>
+
+    </div>
+
+</li>
+    
+        
+<li class="class-method clearfix">
+
+    <div class="hidden-anchor"  id="method-details-error"></div>
+    
+    <div class="method-details">
+        
+
+        
+
+        <div class="method-details-details">
+            <div class="method-signature">
+
+                
+                                    
+                <span class="visibility-protected">protected</span>
+                
+                                
+                function <h3 class="method-name">error</h3>()
+                
+                                
+                    <div>
+                    get sql execute error infomation                    </div>
                     <div>
                                         </div>
                 
