@@ -85,11 +85,6 @@ class Pdo extends Adapter{
 
 	 protected  _pdo { get };
 
-	 /**
-	  * database prefix
-	  */
-
-	protected _prefix { get,set };
 
 	/**
 	 * active pod statement
@@ -165,7 +160,7 @@ class Pdo extends Adapter{
 	}
 
 	/**
-	 *  return pdo prepare statement 
+	 * return pdo prepare statement 
 	 * @param     string      sqlStr
 	 * @return     object      PDOStatement
 	 * <code>

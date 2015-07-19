@@ -32,6 +32,13 @@ abstract class Adapter{
 	public _error { get };
 
 	/**
+	  * database prefix
+	  */
+
+	protected _prefix { get,set };
+
+
+	/**
 	 * The function connect database , params must be array
 	 * <code>
 	 * $config = array(
