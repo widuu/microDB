@@ -14,8 +14,9 @@ $db = new mypdo(
 			'charset'	=>  'utf8',
 		)
 	);
-print_r(get_class_methods("microdb\adapter\pdo"));
-echo $db->getVersion();
+
+
+echo $db->dbVersion();
 
 //you can use this 
 
@@ -24,15 +25,15 @@ $execresult = $db->execPrepare( $statement , array('host'=>'widuu') ,array( 'hos
 
 // or 
 
-$statement = $db->prepare("select * from user where HOST= ? ");
-$execresult = $db->execPrepare( $statement , array('widuu') ,array(  mypdo::TYPE_STR ));
+//$statement = $db->prepare("select * from user where HOST= ? ");
+//$execresult = $db->execPrepare( $statement , array('widuu') ,array(  mypdo::TYPE_STR ));
 
 if ( !$execresult ){
 	echo "Sql query string error\n";
 }
 
-$red = $execresult->fetchAll();
+$result = $execresult->fetchAll();
 
-print_r($red);
+print_r($result);
 
 echo "\n";

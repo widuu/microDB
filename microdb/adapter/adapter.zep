@@ -54,10 +54,9 @@ abstract class Adapter{
 	protected static  function parseConfig( var callback );
 
 	/**
-	 * get mysql server version
 	 *
-	 * @author widuu <admin@widuu.com>
+	 *
 	 */
 
-	abstract protected function getVersion();
+	 abstract protected function  dbVersion();
 }

@@ -19,5 +19,5 @@
 namespace Microdb\Adapter;
 
 class Exception extends \Exception {
-
+	
 }

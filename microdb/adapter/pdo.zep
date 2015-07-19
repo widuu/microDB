@@ -136,11 +136,6 @@ class Pdo extends Adapter{
 			let options = [];
 		}
 
-		// database name
-		if fetch options , config["dbname"] {
-			unset config["dbname"];
-		}
-
 		//set database table prefix
 		if isset config["prefix"] {
 			let this->_prefix = config["prefix"];
@@ -248,7 +243,11 @@ class Pdo extends Adapter{
 	 * @author widuu <admin@widuu.com>
 	 */
 
-	public function getVerison(){
+	public function dbVersion() -> boolean | string {
+		if !isset this->_pdo {
+			throw new Exception( "database service don't connect" );
+			return false;
+		}
 		return this->_pdo->getAttribute(4);
 	}
 
